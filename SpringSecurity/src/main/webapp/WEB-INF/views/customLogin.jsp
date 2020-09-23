@@ -18,6 +18,13 @@
 		<div>
 			<input type='text' name='username' value='admin'>
 		</div>
+		<div>
+			<input type='password' name='password' value='admin'>
+		</div>
+		<div>
+			<input type='submit'>
+		</div>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
 </body>
 </html>

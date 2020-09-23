@@ -10,5 +10,7 @@
 
 <h1>/sample/member page</h1>
 
+<a href="/customLogout">로그아웃</a>
+
 </body>
 </html>
