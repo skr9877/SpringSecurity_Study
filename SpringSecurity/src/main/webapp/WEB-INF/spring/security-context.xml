@@ -7,6 +7,9 @@
 	
 	<bean id="customAccessDenied" class="com.survivalking.security.CustomAccessDeniedHandler"></bean>
 	<bean id="customLoginSuccess" class="com.survivalking.security.CustomLoginSuccessHandler"></bean>
+	<!-- <bean id="customPasswordEncoder" class="com.survivalking.security.CustomNoOpPasswordEncoder"></bean> -->
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<bean id="customUserDetailService" class="com.survivalking.security.CustomUserDetailsService"/> <!-- UserDatailService 빈 등록 -->
 
 	<security:http>
 		<security:intercept-url pattern="/sample/all" access="permitAll"/>
@@ -24,11 +27,17 @@
 	</security:http>
 	
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
+		<security:authentication-provider user-service-ref="customUserDetailService">
+			<!-- <security:jdbc-user-service data-source-ref="dataSource"
+			 users-by-username-query="select userid, userpw, enabled from tbl_member where userid = ?"
+			 authorities-by-username-query="select userid, auth from tbl_member_auth where userid =?"/> -->
+			<!--  <security:password-encoder ref="customPasswordEncoder"/>  -->
+			<security:password-encoder ref="bcryptPasswordEncoder"/> 
+			
+			<!-- <security:user-service>
 				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
 				<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN"/>
-			</security:user-service>
+			</security:user-service> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>
