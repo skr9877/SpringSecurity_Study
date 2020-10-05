@@ -23,7 +23,8 @@
 		<!-- <security:access-denied-handler error-page="/accessError"/>  --> <!-- controller를 통한 denied page 제어 -->
 		<security:access-denied-handler ref="customAccessDenied"/> <!-- handler를 통한 제어 -->
 		
-		
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+		<security:logout logout-url="/customLogout" invalidate-session="true" delete-cookies="remember-me,JSESSIONID"/>
 	</security:http>
 	
 	<security:authentication-manager>
